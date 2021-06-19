@@ -128,7 +128,54 @@ void loop(){
   sensor5 = analogRead(SIG);
   delay(100);
  
-
+  //cekLamp1();
+  if(val1==0 && sensor2<=300){
+    Firebase.setInt("cek1", 100);
+  }else if(val1==0 && sensor2>=300){
+    Firebase.setInt("cek1", 101);
+  }else if(val1==1 && sensor2>=300){
+    Firebase.setInt("cek1", 111);
+  }else if(val1==1 && sensor2<=300){
+    Firebase.setInt("cek1", 110);
+  }
+  delay(500);
+  
+  //cekLamp2();
+  if(val2==0 && sensor3<=300){
+    Firebase.setInt("cek2", 100);
+  }else if(val2==0 && sensor3>=300){
+    Firebase.setInt("cek2", 101);
+  }else if(val2==1 && sensor3>=300){
+    Firebase.setInt("cek2", 111);
+  }else if(val2==1 && sensor3<=300){
+    Firebase.setInt("cek2", 110);
+  }
+  delay(500);
+  
+  //cekLamp3();
+  if(val3==0 && sensor4<=300){
+    Firebase.setInt("cek3", 100);
+  }else if(val3==0 && sensor4>=300){
+    Firebase.setInt("cek3", 101);
+  }else if(val3==1 && sensor4>=300){
+    Firebase.setInt("cek3", 111);
+  }else if(val3==1 && sensor4<=300){
+    Firebase.setInt("cek3", 110);
+  }
+  delay(500);
+  
+  //cekLamp4();
+  if(val4==0 && sensor5<=300){
+    Firebase.setInt("cek4", 100);
+  }else if(val4==0 && sensor5>=300){
+    Firebase.setInt("cek4", 101);
+  }else if(val4==1 && sensor5>=300){
+    Firebase.setInt("cek4", 111);
+  }else if(val4==1 && sensor5<=300){
+    Firebase.setInt("cek4", 110);
+  }
+  delay(500);
+  
   // To measure voltage/current we need to know the frequency of voltage/current
   // By default 50Hz is used, but you can specify desired frequency
   // as first argument to getVoltageAC and getCurrentAC() method, if necessary
