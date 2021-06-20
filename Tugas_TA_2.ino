@@ -1,8 +1,3 @@
-/*
-  This example shows how to measure the power consumption
-  of devices in AC electrical system
-*/
-
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
 #include "ZMPT101B.h"
@@ -14,7 +9,7 @@
 #define WIFI_SSID "SD kraton 3"
 #define WIFI_PASSWORD "sdk3okebgt"
 
-    /* 0- General */
+
 #define S0 D0                             /* Assign Multiplexer pin S0 connect to pin D0 of NodeMCU */
 #define S1 D1                             /* Assign Multiplexer pin S1 connect to pin D1 of NodeMCU */
 #define S2 D2                             /* Assign Multiplexer pin S2 connect to pin D2 of NodeMCU */
@@ -34,8 +29,6 @@ int sensor5;                            /* Assign the name "sensor5" as analog o
 ZMPT101B voltageSensor(A0);
 
 ACS712 currentSensor(ACS712_05B, A0);
-
-//ACS712  ACS(A0, 5.0, 1023, 185);
 
 void setup(){
   Serial.begin(9600);
@@ -67,11 +60,6 @@ void setup(){
   delay(100);
   voltageSensor.calibrate();
   currentSensor.calibrate();
-//  ACS.autoMidPoint();
-//  Serial.print("MidPoint: ");
-//  Serial.print(ACS.getMidPoint());
-//  Serial.print(". Noise mV: ");
-//  Serial.println(ACS.getNoisemV());
   
   Serial.println("Done!");
   delay(1000);
@@ -128,7 +116,7 @@ void loop(){
   sensor5 = analogRead(SIG);
   delay(100);
  
-  //cekLamp1();
+  //cekLamp1
   if(val1==0 && sensor2<=300){
     Firebase.setInt("cek1", 100);
   }else if(val1==0 && sensor2>=300){
@@ -140,7 +128,7 @@ void loop(){
   }
   delay(500);
   
-  //cekLamp2();
+  //cekLamp2
   if(val2==0 && sensor3<=300){
     Firebase.setInt("cek2", 100);
   }else if(val2==0 && sensor3>=300){
@@ -152,7 +140,7 @@ void loop(){
   }
   delay(500);
   
-  //cekLamp3();
+  //cekLamp3
   if(val3==0 && sensor4<=300){
     Firebase.setInt("cek3", 100);
   }else if(val3==0 && sensor4>=300){
@@ -164,7 +152,7 @@ void loop(){
   }
   delay(500);
   
-  //cekLamp4();
+  //cekLamp4
   if(val4==0 && sensor5<=300){
     Firebase.setInt("cek4", 100);
   }else if(val4==0 && sensor5>=300){
@@ -183,11 +171,8 @@ void loop(){
   int V = voltageSensor.getVoltageAC();
   delay(100);
   int I = currentSensor.getCurrentAC();
-  //float I = ACS.mA_AC();
   delay(100);
 
-//  Serial.print("Arus: ");
-//  Serial.println(I);
   // To calculate the power we need voltage multiplied by current
   int W = V * I;
   delay(50);
