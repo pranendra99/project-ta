@@ -6,8 +6,8 @@
 // Set these to run example.
 #define FIREBASE_HOST "kontrol-relay-8906b-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "iaH486tbsu1K3qKQPlwtrlTy1O5aiQVZODS2RHup"
-#define WIFI_SSID "SD kraton 3"
-#define WIFI_PASSWORD "sdk3okebgt"
+#define WIFI_SSID "blankName"
+#define WIFI_PASSWORD "klewangz123"
 
 
 #define S0 D0                             /* Assign Multiplexer pin S0 connect to pin D0 of NodeMCU */
@@ -60,6 +60,8 @@ void setup(){
   delay(100);
   voltageSensor.calibrate();
   currentSensor.calibrate();
+
+  Firebase.setInt("jmlRelay", 4);
   
   Serial.println("Done!");
   delay(1000);
@@ -68,20 +70,20 @@ void setup(){
 
 void loop(){
   int val1 = Firebase.getInt("relay1");
-  delay(100);
+  delay(500);
   int val2 = Firebase.getInt("relay2");
-  delay(100);
+  delay(500);
   int val3 = Firebase.getInt("relay3");
-  delay(100);
+  delay(500);
   int val4 = Firebase.getInt("relay4");
-  delay(100);
+  delay(500);
 
   digitalWrite(D4, val1);
-  delay(50);
+  delay(100);
   digitalWrite(D5, val2);
-  delay(50);
+  delay(100);
   digitalWrite(D6, val3);
-  delay(50);
+  delay(100);
   digitalWrite(D7, val4);
   delay(100);
 
@@ -89,32 +91,72 @@ void loop(){
   // Channel 0 (C0 pin - binary output 0,0,0,0)
   digitalWrite(S0,LOW); digitalWrite(S1,LOW); digitalWrite(S2,LOW); digitalWrite(S3,LOW);
   sensor0 = analogRead(SIG);
-  delay(100);
+  delay(1000);
 
   // Channel 1 (C1 pin - binary output 1,0,0,0)
   digitalWrite(S0,HIGH); digitalWrite(S1,LOW); digitalWrite(S2,LOW); digitalWrite(S3,LOW);
   sensor1 = analogRead(SIG);
-  delay(100);
+  delay(1000);
   
   // Channel 2 (C2 pin - binary output 0,1,0,0)
   digitalWrite(S0,LOW); digitalWrite(S1,HIGH); digitalWrite(S2,LOW); digitalWrite(S3,LOW);
   sensor2 = analogRead(SIG);
-  delay(100); 
+  delay(1000); 
    
   // Channel 3 (C3 pin - binary output 1,1,0,0)
   digitalWrite(S0,HIGH); digitalWrite(S1,HIGH); digitalWrite(S2,LOW); digitalWrite(S3,LOW);
   sensor3 = analogRead(SIG);
-  delay(100);
+  delay(1000);
 
   // Channel 4 (C4 pin - binary output 0,0,1,0)
   digitalWrite(S0,LOW); digitalWrite(S1,LOW); digitalWrite(S2,HIGH); digitalWrite(S3,LOW);
   sensor4 = analogRead(SIG);
-  delay(100);
+  delay(1000);
 
   // Channel 5 (C5 pin - binary output 1,0,1,0)
   digitalWrite(S0,HIGH); digitalWrite(S1,LOW); digitalWrite(S2,HIGH); digitalWrite(S3,LOW);
   sensor5 = analogRead(SIG);
-  delay(100);
+  delay(1000);
+
+//  // Channel 6 (C6 pin - binary output 0,1,1,0)
+//    digitalWrite(S0,LOW); digitalWrite(S1,HIGH); digitalWrite(S2,HIGH); digitalWrite(S3,LOW);
+//    sensor6 = analogRead(SIG);
+//
+//    // Channel 7 (C7 pin - binary output 1,1,1,0)
+//    digitalWrite(S0,HIGH); digitalWrite(S1,HIGH); digitalWrite(S2,HIGH); digitalWrite(S3,LOW);
+//    sensor7 = analogRead(SIG);
+//
+//    // Channel 8 (C8 pin - binary output 0,0,0,1)
+//    digitalWrite(S0,LOW); digitalWrite(S1,LOW); digitalWrite(S2,LOW); digitalWrite(S3,HIGH);
+//    sensor8 = analogRead(SIG);
+//
+//    // Channel 9 (C9 pin - binary output 1,0,0,1)
+//    digitalWrite(S0,HIGH); digitalWrite(S1,LOW); digitalWrite(S2,LOW); digitalWrite(S3,HIGH);
+//    sensor9 = analogRead(SIG);
+//
+//    // Channel 10 (C10 pin - binary output 0,1,0,1)
+//    digitalWrite(S0,LOW); digitalWrite(S1,HIGH); digitalWrite(S2,LOW); digitalWrite(S3,HIGH);
+//    sensor10 = analogRead(SIG);
+//
+//    // Channel 11 (C11 pin - binary output 1,1,0,1)
+//    digitalWrite(S0,HIGH); digitalWrite(S1,HIGH); digitalWrite(S2,LOW); digitalWrite(S3,HIGH);
+//    sensor11 = analogRead(SIG);
+//
+//    // Channel 12 (C12 pin - binary output 0,0,1,1)
+//    digitalWrite(S0,LOW); digitalWrite(S1,LOW); digitalWrite(S2,HIGH); digitalWrite(S3,HIGH);
+//    sensor12 = analogRead(SIG);
+//
+//    // Channel 13 (C13 pin - binary output 1,0,1,1)
+//    digitalWrite(S0,HIGH); digitalWrite(S1,LOW); digitalWrite(S2,HIGH); digitalWrite(S3,HIGH);
+//    sensor13 = analogRead(SIG);
+//
+//    // Channel 14 (C14 pin - binary output 0,1,1,1)
+//    digitalWrite(S0,LOW); digitalWrite(S1,HIGH); digitalWrite(S2,HIGH); digitalWrite(S3,HIGH);
+//    sensor14 = analogRead(SIG);
+//
+//    // Channel 15 (C15 pin - binary output 1,1,1,1)
+//    digitalWrite(S0,HIGH); digitalWrite(S1,HIGH); digitalWrite(S2,HIGH); digitalWrite(S3,HIGH);
+//    sensor15 = analogRead(SIG)
  
   //cekLamp1
   if(val1==0 && sensor2<=300){
@@ -169,26 +211,26 @@ void loop(){
   // as first argument to getVoltageAC and getCurrentAC() method, if necessary
   
   int V = voltageSensor.getVoltageAC();
-  delay(100);
+  delay(500);
   int I = currentSensor.getCurrentAC();
-  delay(100);
+  delay(500);
 
   // To calculate the power we need voltage multiplied by current
   int W = V * I;
-  delay(50);
+  delay(500);
   
   Firebase.setInt("arus", I);
-  delay(100);
+  delay(1000);
   Firebase.setInt("tegangan", V); 
-  delay(100);
+  delay(1000);
   Firebase.setInt("daya", W);
-  delay(100);
+  delay(1000);
   Firebase.setInt("ldr1", sensor2);
-  delay(100);
+  delay(1000);
   Firebase.setInt("ldr2", sensor3);
-  delay(100);
+  delay(1000);
   Firebase.setInt("ldr3", sensor4);
-  delay(100);
+  delay(1000);
   Firebase.setInt("ldr4", sensor5);
-  delay(100);
+  delay(1000);
 }
