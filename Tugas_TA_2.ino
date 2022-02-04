@@ -4,8 +4,8 @@
 #include "ACS712.h"
 
 // Set these to run example.
-#define FIREBASE_HOST "kontrol-relay-8906b-default-rtdb.firebaseio.com"
-#define FIREBASE_AUTH "iaH486tbsu1K3qKQPlwtrlTy1O5aiQVZODS2RHup"
+#define FIREBASE_HOST "firebase-host-example.firebaseio.com"
+#define FIREBASE_AUTH "firebaseauth"
 #define WIFI_SSID "ssid"
 #define WIFI_PASSWORD "password"
 
