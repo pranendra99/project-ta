@@ -6,8 +6,8 @@
 // Set these to run example.
 #define FIREBASE_HOST "kontrol-relay-8906b-default-rtdb.firebaseio.com"
 #define FIREBASE_AUTH "iaH486tbsu1K3qKQPlwtrlTy1O5aiQVZODS2RHup"
-#define WIFI_SSID "blankName"
-#define WIFI_PASSWORD "klewangz123"
+#define WIFI_SSID "ssid"
+#define WIFI_PASSWORD "password"
 
 
 #define S0 D0                             /* Assign Multiplexer pin S0 connect to pin D0 of NodeMCU */
